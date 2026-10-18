@@ -1,0 +1,7 @@
+# When the React build is available, mount its dist directory at /usr/share/nginx/html.
+# Replace only the default.conf location / block with:
+# location / {
+#     root /usr/share/nginx/html;
+#     try_files $uri $uri/ /index.html;
+# }
+# Keep /api/, /ws, /actuator/health and the other proxy locations.

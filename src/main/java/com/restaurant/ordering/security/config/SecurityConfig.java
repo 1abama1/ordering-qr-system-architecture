@@ -33,7 +33,10 @@ public class SecurityConfig {
     @Bean CorsConfigurationSource corsConfigurationSource(AppProperties p) {
         var config = new CorsConfiguration(); config.setAllowedOrigins(p.allowedOrigins());
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
-        config.setAllowedHeaders(List.of("Authorization", "Content-Type", "Idempotency-Key", "X-Correlation-ID", "ngrok-skip-browser-warning"));
+        config.setAllowedHeaders(List.of(
+            "Authorization", "Content-Type", "Idempotency-Key",
+            "X-Correlation-ID", "ngrok-skip-browser-warning"
+        ));
         config.setExposedHeaders(List.of("Location", "Idempotency-Replayed", "X-Correlation-ID", "Retry-After"));
         config.setAllowCredentials(false); config.setMaxAge(3600L);
         var source = new UrlBasedCorsConfigurationSource(); source.registerCorsConfiguration("/**", config); return source;

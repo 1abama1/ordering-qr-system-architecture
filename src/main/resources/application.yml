@@ -3,8 +3,8 @@ spring:
     name: restaurant-ordering
   datasource:
     url: ${DB_URL:jdbc:postgresql://localhost:5432/ordering}
-    username: ${DB_USERNAME:ordering}
-    password: ${DB_PASSWORD}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:123321}
     hikari:
       maximum-pool-size: 15
       connection-timeout: 10000
@@ -48,8 +48,8 @@ management:
   endpoints.web.exposure.include: health,info
   endpoint.health.show-details: never
 app:
-  jwt-secret: ${JWT_SECRET}
-  qr-secret: ${QR_SECRET}
+  jwt-secret: ${JWT_SECRET:581C32CE87C5E54B85A9A7028A7F17EB9DD473182F873C40C974CF18F3C7BA9F}
+  qr-secret: ${QR_SECRET:E82E5F52F1B8DC80A72B9C1BAAC2BF7BE7AC53C3BF6D97A62B3A880346143CAA}
   jwt-ttl-minutes: 15
   guest-menu-url: ${GUEST_MENU_URL:http://localhost:5173/menu}
   allowed-origins: ${ALLOWED_ORIGINS:http://localhost:5173,http://localhost:8080}

@@ -1,0 +1,5 @@
+# Optional PostgreSQL access for Maven runs on the host.
+services:
+  postgres:
+    ports:
+      - "127.0.0.1:5432:5432"

@@ -1,0 +1,63 @@
+spring:
+  application:
+    name: restaurant-ordering
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/ordering}
+    username: ${DB_USERNAME:ordering}
+    password: ${DB_PASSWORD}
+    hikari:
+      maximum-pool-size: 15
+      connection-timeout: 10000
+      connection-init-sql: "SET lock_timeout = '5s'"
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        jdbc.time_zone: UTC
+        default_batch_fetch_size: 50
+        query.fail_on_pagination_over_collection_fetch: true
+  flyway:
+    enabled: true
+    clean-disabled: true
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: true
+  mvc:
+    problemdetails:
+      enabled: true
+  servlet:
+    multipart:
+      enabled: false
+  lifecycle:
+    timeout-per-shutdown-phase: 20s
+server:
+  port: ${SERVER_PORT:8080}
+  shutdown: graceful
+  forward-headers-strategy: none
+  error:
+    include-message: never
+    include-stacktrace: never
+  tomcat:
+    max-http-form-post-size: 32KB
+    max-swallow-size: 32KB
+    threads:
+      max: 100
+management:
+  endpoints.web.exposure.include: health,info
+  endpoint.health.show-details: never
+app:
+  jwt-secret: ${JWT_SECRET}
+  qr-secret: ${QR_SECRET}
+  jwt-ttl-minutes: 15
+  guest-menu-url: ${GUEST_MENU_URL:http://localhost:5173/menu}
+  allowed-origins: ${ALLOWED_ORIGINS:http://localhost:5173,http://localhost:8080}
+  order-rate-limit: 30
+  login-rate-limit: 10
+  qr-rate-limit: 60
+logging:
+  pattern.level: "%5p [correlation=%X{correlationId:-}]"
+  level:
+    org.hibernate.SQL: WARN
+    org.springframework.web: INFO
